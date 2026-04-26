@@ -3,19 +3,21 @@ import { createClient } from '@supabase/supabase-js';
 const supabase = createClient(process.env.SUPABASE_URL, process.env.SUPABASE_KEY);
 
 export default async function handler(req, res) {
-    if (req.method !== 'POST') return res.status(405).send("Method Not Allowed");
+    if (req.method !== 'GET') {
+        return res.status(405).json({ message: 'Method Not Allowed' });
+    }
 
-    const { url, layanan, jumlah, price } = req.body;
-    
-    const { data, error } = await supabase
-        .from('testimonials')
-        .insert([{ 
-            image_url: url, 
-            layanan: layanan, 
-            jumlah: jumlah, 
-            price: price 
-        }]);
+    try {
+        const { data, error } = await supabase
+            .from('testimonials')
+            .select('*')
+            .order('id', { ascending: false });
 
-    if (error) return res.status(500).json(error);
-    return res.status(200).json({ success: true });
+        if (error) throw error;
+
+        return res.status(200).json(data);
+    } catch (error) {
+        console.error("Supabase Error:", error.message);
+        return res.status(500).json({ error: error.message });
+    }
 }
