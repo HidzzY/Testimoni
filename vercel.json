@@ -1,0 +1,6 @@
+{
+  "rewrites": [
+    { "source": "/login/(.*)/(.*)", "destination": "/api/auth?user=$1&pass=$2" },
+    { "source": "/dashboard", "destination": "/api/admin" }
+  ]
+}

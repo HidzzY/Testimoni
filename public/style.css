@@ -1,0 +1,15 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;700;800&display=swap');
+
+body { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+.btn-primary {
+    @apply px-10 py-4 bg-white text-black font-bold rounded-2xl hover:scale-105 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)];
+}
+
+.btn-secondary {
+    @apply px-10 py-4 bg-transparent border border-white/20 font-bold rounded-2xl hover:bg-white/5 transition-all;
+}
+
+.testi-card {
+    @apply p-2 bg-[#111] border border-white/5 rounded-2xl hover:border-blue-500/50 transition-all duration-500;
+}
