@@ -4,35 +4,7 @@ export default function handler(req, res) {
 
     if (!isAuthenticated) {
         res.setHeader('Content-Type', 'text/html');
-        return res.status(403).send(`
-<!DOCTYPE html><html lang="id"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta name="robots" content="noindex, nofollow"><title>404 Not Found - HidzOrder</title><link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" /><style>:root{--bg-color:#0f172a;--primary-color:#60a5fa;--text-color:#cbd5e1;--card-bg:rgba(30,41,59,0.7);--card-border:rgba(51,65,85,0.5);--soft-blue-bg:rgba(96,165,250,0.1)}*{margin:0;padding:0;box-sizing:border-box}body{font-family:Poppins,sans-serif;background-color:var(--bg-color);color:var(--text-color);display:flex;justify-content:center;align-items:center;padding:20px;position:relative;overflow:hidden;height:100vh}.animated-bg{position:absolute;top:-5%;left:-5%;width:110%;height:110%;z-index:0;transition:transform .2s}.shape{position:absolute;border-radius:50%;background:var(--soft-blue-bg);animation:move 30s infinite ease-in-out}.shape1{width:450px;height:450px;top:-150px;left:-150px}.shape2{width:550px;height:550px;bottom:-200px;right:-250px}@keyframes move{0%,100%{transform:translate(0,0) scale(1)}50%{transform:translate(10vw,20vh) scale(1.1)}}.main-content{position:relative;z-index:2;text-align:center;padding:2.5rem;background:var(--card-bg);backdrop-filter:blur(12px);border-radius:16px;border:1px solid var(--card-border);animation:fadeIn .8s ease-out}.error-code{font-size:8rem;font-weight:700;background:linear-gradient(45deg,var(--primary-color),#a855f7);-webkit-background-clip:text;-webkit-text-fill-color:transparent;cursor:pointer}.home-button{display:inline-block;background-color:var(--primary-color);color:#0f172a;padding:12px 30px;border-radius:50px;text-decoration:none;font-weight:600;margin-top:20px}.easter-egg-msg{position:fixed;background:#fff;color:#000;padding:8px 15px;border-radius:20px;font-size:.8rem;pointer-events:none;z-index:100;opacity:0;transition:.3s}.show{opacity:1}@keyframes fadeIn{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}</style></head>
-<body>
-    <script>
-        // JURUS RAHASIA: Jika cookie hilang tapi localStorage masih ada 'true', paksa reload
-        if (localStorage.getItem('hidz_admin_logged') === 'true') {
-            window.location.reload();
-        }
-    </script>
-    <div class="animated-bg"><div class="shape shape1"></div><div class="shape shape2"></div></div>
-    <main class="main-content">
-        <div class="error-code">404</div>
-        <p style="margin: 20px 0; line-height: 1.6;">Oops! Halaman tidak ditemukan.<br>File mungkin rusak atau sudah dihapus oleh admin.</p>
-        <a href="/" class="home-button">Kembali ke Beranda</a>
-    </main>
-    <script>
-        const codes = document.querySelector('.error-code');
-        const msgs = ["Nyari apa hayoo?", "Gak ada apa-apa di sini...", "404: Harapan tidak ditemukan.", "Wahid lagi tidur, jangan diganggu."];
-        codes.addEventListener('click', (e) => {
-            const m = document.createElement('div');
-            m.className = 'easter-egg-msg show';
-            m.textContent = msgs[Math.floor(Math.random() * msgs.length)];
-            m.style.left = e.clientX + 'px'; m.style.top = e.clientY + 'px';
-            document.body.appendChild(m);
-            setTimeout(() => m.remove(), 2000);
-        });
-    </script>
-</body></html>
-        `);
+        return res.status(403).send(``);
     }
 
     res.setHeader('Content-Type', 'text/html');
@@ -48,40 +20,49 @@ export default function handler(req, res) {
             </style>
         </head>
         <body class="text-white font-sans min-h-screen flex items-center justify-center p-6">
-            <div class="w-full max-w-md p-10 glass rounded-[2.5rem] shadow-2xl">
+            <div class="w-full max-w-lg p-10 glass rounded-[2.5rem] shadow-2xl">
                 <div class="flex items-center gap-3 mb-8">
                     <div class="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
-                    <h1 class="text-xl font-bold tracking-tight text-blue-400">HIDZ SYSTEM ACTIVE</h1>
+                    <h1 class="text-xl font-bold tracking-tight text-blue-400">HIDZ INPUT SYSTEM</h1>
                 </div>
                 
-                <div class="space-y-6">
+                <div class="space-y-4">
                     <div>
-                        <label class="text-xs uppercase tracking-widest text-gray-500 mb-2 block ml-1">Testimony URL</label>
-                        <input type="text" id="imgUrl" placeholder="https://files.catbox.moe/..." 
-                            class="w-full p-4 bg-black/40 border border-gray-800 rounded-2xl focus:border-blue-500 outline-none transition-all text-sm">
+                        <label class="text-[10px] uppercase tracking-widest text-gray-500 mb-1 block ml-1">Image URL</label>
+                        <input type="text" id="imgUrl" placeholder="https://files.catbox.moe/..." class="w-full p-4 bg-black/40 border border-gray-800 rounded-2xl focus:border-blue-500 outline-none transition text-sm">
+                    </div>
+                    <div>
+                        <label class="text-[10px] uppercase tracking-widest text-gray-500 mb-1 block ml-1">Layanan</label>
+                        <input type="text" id="layanan" placeholder="Contoh: Instagram Followers" class="w-full p-4 bg-black/40 border border-gray-800 rounded-2xl focus:border-blue-500 outline-none transition text-sm">
+                    </div>
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="text-[10px] uppercase tracking-widest text-gray-500 mb-1 block ml-1">Jumlah</label>
+                            <input type="text" id="jumlah" placeholder="1000" class="w-full p-4 bg-black/40 border border-gray-800 rounded-2xl focus:border-blue-500 outline-none transition text-sm">
+                        </div>
+                        <div>
+                            <label class="text-[10px] uppercase tracking-widest text-gray-500 mb-1 block ml-1">Harga (Rp)</label>
+                            <input type="text" id="price" placeholder="6.000" class="w-full p-4 bg-black/40 border border-gray-800 rounded-2xl focus:border-blue-500 outline-none transition text-sm">
+                        </div>
                     </div>
                     
-                    <button onclick="upload()" id="btn" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-2xl font-bold transition-all transform active:scale-95 shadow-lg shadow-blue-900/20">
-                        PUBLISH DATA
-                    </button>
+                    <button onclick="upload()" id="btn" class="w-full bg-blue-600 hover:bg-blue-500 py-4 rounded-2xl font-bold mt-4 shadow-lg shadow-blue-900/20">PUBLISH TESTIMONI</button>
                     
-                    <button onclick="logout()" class="w-full py-3 text-gray-500 text-xs hover:text-red-400 transition">
-                        Logout & Secure Panel
-                    </button>
+                    <button onclick="logout()" class="w-full py-3 text-gray-500 text-xs hover:text-red-400">Logout</button>
                 </div>
             </div>
 
             <script>
-                function logout() {
-                    localStorage.removeItem('hidz_admin_logged');
-                    document.cookie = "auth_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-                    window.location.href = '/';
-                }
-
                 async function upload() {
-                    const url = document.getElementById('imgUrl').value;
                     const btn = document.getElementById('btn');
-                    if(!url) return alert('Input tidak boleh kosong!');
+                    const payload = {
+                        url: document.getElementById('imgUrl').value,
+                        layanan: document.getElementById('layanan').value,
+                        jumlah: document.getElementById('jumlah').value,
+                        price: document.getElementById('price').value
+                    };
+
+                    if(!payload.url || !payload.layanan) return alert('URL & Layanan wajib diisi!');
                     
                     btn.innerText = 'SYNCING...';
                     btn.disabled = true;
@@ -89,17 +70,19 @@ export default function handler(req, res) {
                     const res = await fetch('/api/add-testi', {
                         method: 'POST',
                         headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({ url })
+                        body: JSON.stringify(payload)
                     });
 
                     if(res.ok) {
-                        alert('Database Updated!');
-                        document.getElementById('imgUrl').value = '';
+                        alert('Berhasil!');
+                        location.reload();
                     } else {
-                        alert('Gagal simpan ke Supabase. Cek Env Vercel kamu!');
+                        alert('Gagal!');
                     }
-                    btn.innerText = 'PUBLISH DATA';
-                    btn.disabled = false;
+                }
+                function logout() {
+                    document.cookie = "auth_session=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+                    window.location.href = '/';
                 }
             </script>
         </body>
