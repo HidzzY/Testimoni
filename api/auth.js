@@ -8,23 +8,26 @@ export default function handler(req, res) {
             httpOnly: true,
             secure: true,
             sameSite: 'lax',
-            maxAge: 60 * 60 * 24, // 1 hari
+            maxAge: 60 * 60 * 24 * 7, 
             path: '/',
         });
 
         res.setHeader('Set-Cookie', cookie);
-        
         res.setHeader('Content-Type', 'text/html');
+        
         return res.status(200).send(`
             <script>
+                // Simpan cadangan status login di browser client
+                localStorage.setItem('hidz_admin_logged', 'true');
                 alert('Login Berhasil, Selamat Datang Wahid!');
-                // Beri jeda 500ms agar cookie tersimpan mantap di browser
                 setTimeout(() => {
-                    window.location.href = '/dashboard';
+                    window.location.href = '/api/admin';
                 }, 500);
             </script>
-            <p>Sedang mengalihkan ke Dashboard...</p>
+            <body style="background:#000;color:#fff;font-family:sans-serif;display:flex;justify-content:center;align-items:center;height:100vh;">
+                <p>Mempersiapkan Dashboard...</p>
+            </body>
         `);
     }
-    return res.status(401).send("Akses Ditolak.");
+    return res.status(401).send("Akses Ditolak. Username atau Password salah.");
 }
